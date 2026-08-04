@@ -1,0 +1,16 @@
+title: "Marina Quintana| Portfolio de Ciberseguridad"
+description: "Portfolio del Google Cybersecurity Professional Certificate — análisis aplicado a entorno corporativo"
+theme: jekyll-theme-cayman
+show_downloads: false
+
+# Navegación (algunos themes la usan, no todos la renderizan automáticamente,
+# pero la dejamos preparada como referencia)
+nav_links:
+  - title: Inicio
+    url: /
+  - title: Módulo 1 — Fundamentos
+    url: /modulo-1-fundamentos/
+  - title: Módulo 2 — Network Security
+    url: /modulo-2-network-security/
+  - title: Módulo 3 — Vulnerabilidades
+    url: /modulo-3-vulnerabilidades/
