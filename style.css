@@ -54,6 +54,13 @@ footer a { color: #185fa5; text-decoration: none; }
 body.sidebar-hidden .sidebar { display: none; }
 body.sidebar-hidden .sidebar-toggle-open { display: block; }
  
+/* Con el sidebar oculto, el botón ☰ queda fijo arriba a la izquierda:
+   se reserva espacio para que nunca tape el título de la página. */
+body.sidebar-hidden .hero-band,
+body.sidebar-hidden .page-intro {
+  padding-top: 64px;
+}
+ 
 /* --- Overlay para cierre táctil en móvil --- */
 .sidebar-backdrop { display: none; }
  
@@ -86,17 +93,13 @@ body.sidebar-hidden .sidebar-toggle-open { display: block; }
  
 .card-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 14px; padding: 0 50px 40px; }
  
-.area-card { background: #e6f1fb; border-radius: 10px; padding: 16px; cursor: pointer; transition: background-color 0.2s; }
-.area-card:focus-visible { outline: 2px solid #185fa5; outline-offset: 2px; }
-.area-card.expanded { background: #185fa5; }
-.area-card.expanded .card-name { color: #ffffff; }
+.area-card { background: #185fa5; border-radius: 10px; padding: 16px; }
  
 .card-header { display: flex; align-items: center; gap: 10px; }
 .card-icon { font-size: 1.3em; }
-.card-name { font-weight: 500; color: #042c53; }
+.card-name { font-weight: 500; color: #ffffff; }
  
-.card-detail { display: none; margin: 10px 0 0; font-size: 0.9em; color: #e6f1fb; }
-.area-card.expanded .card-detail { display: block; }
+.card-detail { display: block; margin: 10px 0 0; font-size: 0.9em; color: #e6f1fb; }
  
 .case-list { padding: 0 50px 40px; }
 #contacto { margin: 0 50px 40px; }
@@ -155,3 +158,4 @@ body.sidebar-hidden .sidebar-toggle-open { display: block; }
   .case-list { padding: 0 20px 32px; }
   #contacto { margin: 0 20px 32px; }
 }
+ 
