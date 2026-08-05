@@ -116,17 +116,19 @@ body.sidebar-hidden .sidebar { display: none; }
     max-width: 280px;
     z-index: 25;
     box-shadow: 2px 0 16px rgba(0,0,0,0.25);
-    transform: translateX(0);
+    transform: translateX(-100%);
     transition: transform 0.25s ease;
   }
 
-  body.sidebar-hidden .sidebar {
+  /* Cerrado es el estado por defecto en móvil, puro CSS —
+     no depende de que el JS llegue a ejecutarse a tiempo.
+     Solo se abre añadiendo explícitamente .sidebar-open. */
+  body.sidebar-open .sidebar {
     display: block;
-    transform: translateX(-100%);
+    transform: translateX(0);
   }
-  body.sidebar-hidden .sidebar-backdrop { display: none; }
 
-  body:not(.sidebar-hidden) .sidebar-backdrop {
+  body.sidebar-open .sidebar-backdrop {
     display: block;
     position: fixed; inset: 0;
     background: rgba(4,44,83,0.4);
@@ -375,16 +377,22 @@ body.sidebar-hidden .sidebar { display: none; }
       });
 
       window.scrollTo(0, 0);
-      if (isMobile()) setSidebarHidden(true);
+      // Al navegar, el overlay móvil se cierra siempre (inofensivo en desktop:
+      // esta clase no se usa ahí).
+      document.body.classList.remove('sidebar-open');
     }
 
-    function setSidebarHidden(hide) {
-      document.body.classList.toggle('sidebar-hidden', hide);
-      localStorage.setItem('sidebarHidden', hide);
-    }
-
+    /* Desktop: .sidebar-hidden oculta el panel completo (modo foco).
+       Móvil: .sidebar-open revela el overlay (cerrado es el default en CSS,
+       sin depender del JS). Un mismo botón ☰, comportamiento correcto
+       según el ancho real en el momento del clic. */
     function toggleSidebar() {
-      setSidebarHidden(!document.body.classList.contains('sidebar-hidden'));
+      if (isMobile()) {
+        document.body.classList.toggle('sidebar-open');
+      } else {
+        var hidden = document.body.classList.toggle('sidebar-hidden');
+        localStorage.setItem('sidebarHidden', hidden);
+      }
     }
 
     function isMobile() {
@@ -396,15 +404,16 @@ body.sidebar-hidden .sidebar { display: none; }
     window.addEventListener('DOMContentLoaded', function () {
       buildNav();
 
-      var stored = localStorage.getItem('sidebarHidden');
-      if (stored === 'true') {
+      // Preferencia de "panel oculto" solo aplica en desktop; en móvil
+      // el CSS ya arranca cerrado por defecto, no hace falta JS para eso.
+      if (!isMobile() && localStorage.getItem('sidebarHidden') === 'true') {
         document.body.classList.add('sidebar-hidden');
       }
 
       render();
 
       document.querySelector('.sidebar-backdrop').addEventListener('click', function () {
-        setSidebarHidden(true);
+        document.body.classList.remove('sidebar-open');
       });
     });
   </script>
