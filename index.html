@@ -1,36 +1,412 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Marina Quintana | Portfolio de Ciberseguridad</title>
-  <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Marina Quintana | Portfolio de Ciberseguridad</title>
+<style>
+/* ============================================================
+   TODO EL SITIO EN UN SOLO ARCHIVO.
+   Para añadir/quitar un apartado del menú: busca NAV_LINKS más
+   abajo en el <script> y edita ese único bloque.
+   ============================================================ */
+* { box-sizing: border-box; }
+
+body {
+  font-family: 'Segoe UI', Arial, sans-serif;
+  margin: 0;
+  display: flex;
+  min-height: 100vh;
+  color: #042c53;
+  background-color: #ffffff;
+}
+
+.sidebar {
+  width: 240px;
+  flex-shrink: 0;
+  background-color: #042c53;
+  padding: 72px 16px 30px;
+}
+
+.sidebar .name { color: #ffffff; font-size: 1.1em; font-weight: 600; margin-bottom: 6px; }
+.sidebar .tagline { color: #85b7eb; font-size: 0.85em; margin-bottom: 24px; }
+
+.sidebar nav a {
+  display: block; padding: 10px 12px; margin-bottom: 4px; border-radius: 6px;
+  color: #b5d4f4; text-decoration: none; font-size: 0.9em; cursor: pointer;
+}
+.sidebar nav a:hover { background-color: #0c447c; color: #ffffff; }
+.sidebar nav a.active { background-color: #185fa5; color: #ffffff; font-weight: 500; }
+
+/* main SIEMPRE reserva 72px arriba: el botón ☰ (16px + 38px alto = 54px)
+   nunca puede tapar contenido, en NINGÚN estado ni ancho de pantalla.
+   Esta es la única regla que controla ese espacio — nada más la toca. */
+main { flex: 1; padding: 72px 50px 40px; max-width: 760px; line-height: 1.6; }
+
+h1 { color: #042c53; margin-top: 0; }
+h2 { border-left: 4px solid #378add; padding-left: 10px; color: #0c447c; }
+
+ul { list-style: none; padding: 0; }
+li { margin-bottom: 10px; padding: 12px 16px; background-color: #e6f1fb; border-radius: 6px; }
+li a { color: #0c447c; text-decoration: none; font-weight: 500; cursor: pointer; }
+li a:hover { text-decoration: underline; }
+
+.back-link { display: inline-block; margin-top: 16px; color: #185fa5; text-decoration: none; font-size: 0.9em; cursor: pointer; }
+
+/* --- Botón único de menú: fijo, siempre visible --- */
+.sidebar-toggle {
+  position: fixed; top: 16px; left: 16px; z-index: 30;
+  background: #185fa5; color: #ffffff; border: none; border-radius: 6px;
+  width: 38px; height: 38px; cursor: pointer; font-size: 1em;
+}
+
+body.sidebar-hidden .sidebar { display: none; }
+
+.sidebar-backdrop { display: none; }
+
+/* --- Páginas (secciones que se muestran/ocultan por hash) --- */
+.page[hidden] { display: none; }
+
+.hero-band { background: #ffffff; text-align: center; padding: 40px 30px; margin: -72px -50px 0; border-bottom: 1px solid #e6f1fb; }
+.hero-band-inner { padding-top: 64px; }
+.hero-band h1 { margin: 0 0 6px; font-size: 1.8em; }
+.hero-tagline { color: #185fa5; font-weight: 500; margin: 0 0 12px; }
+.hero-desc { color: #5f5e5a; max-width: 500px; margin: 0 auto; }
+
+.feature-band { display: flex; align-items: center; gap: 30px; padding: 36px 0; }
+.feature-band.reverse { flex-direction: row-reverse; }
+
+.feature-icon {
+  flex-shrink: 0; width: 80px; height: 80px; background: #185fa5; border-radius: 12px;
+  display: flex; align-items: center; justify-content: center; font-size: 2em;
+}
+
+.feature-text h2 { border: none; padding: 0; margin: 0 0 6px; }
+.feature-text p { margin: 0; color: #333; }
+
+.page-intro p { color: #5f5e5a; max-width: 560px; }
+
+.section-title { margin: 30px 0 10px; }
+
+.card-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 14px; margin-bottom: 20px; }
+
+.area-card { background: #185fa5; border-radius: 10px; padding: 16px; }
+
+.card-header { display: flex; align-items: center; gap: 10px; }
+.card-icon { font-size: 1.3em; }
+.card-name { font-weight: 500; color: #ffffff; }
+
+.card-detail { display: block; margin: 10px 0 0; font-size: 0.9em; color: #e6f1fb; }
+
+.contact-page ul { max-width: 320px; }
+
+/* =========================================================
+   RESPONSIVE MÓVIL — sidebar pasa de panel fijo a overlay
+   ========================================================= */
+@media (max-width: 768px) {
+  body { display: block; }
+
+  main { padding: 72px 20px 32px; max-width: 100%; }
+  .hero-band { margin: -72px -20px 0; padding: 32px 20px; }
+
+  .sidebar {
+    position: fixed;
+    top: 0; left: 0; bottom: 0;
+    width: 78%;
+    max-width: 280px;
+    z-index: 25;
+    box-shadow: 2px 0 16px rgba(0,0,0,0.25);
+    transform: translateX(0);
+    transition: transform 0.25s ease;
+  }
+
+  body.sidebar-hidden .sidebar {
+    display: block;
+    transform: translateX(-100%);
+  }
+  body.sidebar-hidden .sidebar-backdrop { display: none; }
+
+  body:not(.sidebar-hidden) .sidebar-backdrop {
+    display: block;
+    position: fixed; inset: 0;
+    background: rgba(4,44,83,0.4);
+    z-index: 20;
+  }
+
+  .feature-band, .feature-band.reverse {
+    flex-direction: column;
+    text-align: center;
+    padding: 28px 0;
+    gap: 16px;
+  }
+  .card-grid { grid-template-columns: 1fr; }
+}
+</style>
 </head>
 <body>
- 
+
   <div class="sidebar-backdrop"></div>
   <div class="sidebar">
     <div class="name">Marina Quintana</div>
     <div class="tagline">Portfolio de ciberseguridad</div>
-    <nav>
-      <a href="index.html" class="active">Inicio</a>
-      <a href="certificado-ciberseguridad.html">Certificado Ciberseguridad</a>
-      <a href="casos-analisis.html">Casos de análisis</a>
-      <a href="contacto.html">Contacto</a>
-    </nav>
+    <nav id="nav-links"></nav>
   </div>
   <button class="sidebar-toggle" onclick="toggleSidebar()">☰</button>
- 
-  <main class="single-page">
-    <section id="inicio" class="hero-band">
-      <h1>Marina Quintana</h1>
-      <p class="hero-tagline">Consultora de Seguridad · Análisis de riesgos</p>
-      <p class="hero-desc">Portfolio del Google Cybersecurity Professional Certificate, aplicado desde
-      criminología y consultoría de innovación al análisis de riesgo y cibercrimen corporativo.</p>
+
+  <main>
+
+    <!-- INICIO -->
+    <section class="page" data-page="inicio">
+      <div class="hero-band">
+        <div class="hero-band-inner">
+          <h1>Marina Quintana</h1>
+          <p class="hero-tagline">Consultora de Seguridad · Análisis de riesgos</p>
+          <p class="hero-desc">Portfolio del Google Cybersecurity Professional Certificate, aplicado desde
+          criminología y consultoría de innovación al análisis de riesgo y cibercrimen corporativo.</p>
+        </div>
+      </div>
     </section>
+
+    <!-- CERTIFICADO CIBERSEGURIDAD -->
+    <section class="page" data-page="certificado-ciberseguridad" hidden>
+      <div class="page-intro">
+        <h1>Certificado Ciberseguridad</h1>
+        <p>Áreas de conocimiento cubiertas por el Google Cybersecurity Professional Certificate,
+        aplicadas con perspectiva de análisis de riesgo y criminología.</p>
+      </div>
+
+      <div class="feature-band">
+        <div class="feature-icon">🛡️</div>
+        <div class="feature-text">
+          <h2>Gestión de riesgos de seguridad</h2>
+          <p>Evaluación y priorización de riesgos mediante matrices de probabilidad/impacto.
+          Aplicación del framework NIST RMF y elaboración de playbooks de respuesta accionables.
+          Traducción de amenaza técnica a riesgo de negocio cuantificable.</p>
+        </div>
+      </div>
+
+      <div class="feature-band reverse">
+        <div class="feature-icon">🔍</div>
+        <div class="feature-text">
+          <h2>Activos, amenazas y vulnerabilidades</h2>
+          <p>Inventariado de activos y análisis de superficie de ataque. Identificación de vectores
+          de explotación con manejo de CVE y CVSS. Perfilado de actores de amenaza mediante modelo
+          de motivación-capacidad-oportunidad, trasladado del análisis criminal al dominio digital.</p>
+        </div>
+      </div>
+
+      <div class="feature-band">
+        <div class="feature-icon">🚨</div>
+        <div class="feature-text">
+          <h2>Detección y respuesta ante incidentes</h2>
+          <p>Gestión del ciclo de vida del incidente según NIST: detección, contención, erradicación,
+          recuperación. Correlación de eventos con herramientas SIEM, triaje de alertas y
+          reconstrucción de la cadena de ataque.</p>
+        </div>
+      </div>
+
+      <h2 class="section-title">Todas las áreas trabajadas</h2>
+      <div class="card-grid">
+        <div class="area-card">
+          <div class="card-header"><span class="card-icon">🔐</span><span class="card-name">Fundamentos de ciberseguridad</span></div>
+          <p class="card-detail">Dominio de la tríada CIA, modelos de control de acceso y criptografía básica.
+          Aplicación de frameworks de referencia (NIST CSF, OWASP) y marco ético y normativo (GDPR).</p>
+        </div>
+        <div class="area-card">
+          <div class="card-header"><span class="card-icon">🌐</span><span class="card-name">Redes y seguridad de red</span></div>
+          <p class="card-detail">Análisis de arquitectura TCP/IP y modelo OSI. Segmentación de red (VLANs,
+          subnetting) y configuración de mecanismos de defensa perimetral: firewalls, VPN, IDS/IPS.</p>
+        </div>
+        <div class="area-card">
+          <div class="card-header"><span class="card-icon">💻</span><span class="card-name">Herramientas: Linux y SQL</span></div>
+          <p class="card-detail">Administración de sistemas mediante línea de comandos Linux: gestión de
+          permisos, procesos y logs. Consultas SQL complejas para extracción y cruce de datos de seguridad.</p>
+        </div>
+        <div class="area-card">
+          <div class="card-header"><span class="card-icon">🐍</span><span class="card-name">Automatización con Python</span></div>
+          <p class="card-detail">Desarrollo de scripts para parsing y filtrado de logs, detección de patrones
+          mediante expresiones regulares e integración básica con APIs de threat intelligence.</p>
+        </div>
+      </div>
+
+      <a class="back-link" href="#/inicio">← Volver al inicio</a>
+    </section>
+
+    <!-- CASOS DE ANÁLISIS -->
+    <section class="page" data-page="casos-analisis" hidden>
+      <div class="page-intro">
+        <h1>Casos de análisis en profundidad</h1>
+        <p>Ejercicios prácticos por módulo del certificado, con metodología, hallazgos y conclusiones.</p>
+      </div>
+      <ul>
+        <li><a href="#/modulo-1">Módulo 1 — Fundamentos de ciberseguridad</a></li>
+        <li><a href="#/modulo-2">Módulo 2 — Network Security</a></li>
+        <li><a href="#/modulo-3">Módulo 3 — Gestión de vulnerabilidades</a></li>
+      </ul>
+      <a class="back-link" href="#/inicio">← Volver al inicio</a>
+    </section>
+
+    <!-- CONTACTO -->
+    <section class="page" data-page="contacto" hidden>
+      <div class="page-intro">
+        <h1>Contacto</h1>
+        <p>¿Hablamos sobre análisis de riesgo, respuesta a incidentes o una colaboración?</p>
+      </div>
+      <div class="contact-page">
+        <ul>
+          <li>📎 <a href="#">LinkedIn</a></li>
+          <li>📧 <a href="#">Email</a></li>
+        </ul>
+      </div>
+      <a class="back-link" href="#/inicio">← Volver al inicio</a>
+    </section>
+
+    <!-- MÓDULO 1 -->
+    <section class="page" data-page="modulo-1" hidden>
+      <h1>Módulo 1 — Fundamentos de ciberseguridad</h1>
+      <h2>📌 Contexto</h2>
+      <p>Este módulo introduce los conceptos base de ciberseguridad (CIA triad, tipos de amenazas,
+      frameworks NIST/OWASP) y el marco ético de la profesión. Conecta directamente con la evaluación
+      de riesgo corporativo desde mi perfil consultor.</p>
+      <h2>🛠️ Qué hice</h2>
+      <ul>
+        <li>Análisis de un caso de brecha de seguridad real usando el framework NIST</li>
+        <li>Clasificación de activos según confidencialidad/integridad/disponibilidad</li>
+        <li>Mapeo de actores de amenaza (insider, hacktivista, cibercrimen organizado, estado-nación)</li>
+      </ul>
+      <h2>🖼️ Evidencias</h2>
+      <p><em>[Añade aquí capturas si el certificado permite compartirlas públicamente]</em></p>
+      <h2>💡 Conclusión / Insight</h2>
+      <p>La clasificación de actores de amenaza es prácticamente idéntica a la tipología de perfiles
+      criminales usada en análisis criminal — mismo enfoque de motivación, capacidad y oportunidad,
+      aplicado ahora al dominio digital.</p>
+      <a class="back-link" href="#/casos-analisis">← Volver a Casos de análisis</a>
+    </section>
+
+    <!-- MÓDULO 2 -->
+    <section class="page" data-page="modulo-2" hidden>
+      <h1>Módulo 2 — Network Security</h1>
+      <h2>📌 Contexto</h2>
+      <p><em>[Escribe aquí qué cubre este módulo y por qué es relevante para tu perfil]</em></p>
+      <h2>🛠️ Qué hice</h2>
+      <ul>
+        <li><em>[Ejercicio o lab 1]</em></li>
+        <li><em>[Ejercicio o lab 2]</em></li>
+      </ul>
+      <h2>🖼️ Evidencias</h2>
+      <p><em>[Capturas o diagramas, si aplica]</em></p>
+      <h2>💡 Conclusión / Insight</h2>
+      <p><em>[Tu reflexión conectando esto con tu experiencia consultora/analítica]</em></p>
+      <a class="back-link" href="#/casos-analisis">← Volver a Casos de análisis</a>
+    </section>
+
+    <!-- MÓDULO 3 -->
+    <section class="page" data-page="modulo-3" hidden>
+      <h1>Módulo 3 — Gestión de vulnerabilidades</h1>
+      <h2>📌 Contexto</h2>
+      <p><em>[Escribe aquí qué cubre este módulo y por qué es relevante para tu perfil]</em></p>
+      <h2>🛠️ Qué hice</h2>
+      <ul>
+        <li><em>[Ejercicio o lab 1]</em></li>
+        <li><em>[Ejercicio o lab 2]</em></li>
+      </ul>
+      <h2>🖼️ Evidencias</h2>
+      <p><em>[Capturas o diagramas, si aplica]</em></p>
+      <h2>💡 Conclusión / Insight</h2>
+      <p><em>[Tu reflexión conectando esto con tu experiencia consultora/analítica]</em></p>
+      <a class="back-link" href="#/casos-analisis">← Volver a Casos de análisis</a>
+    </section>
+
   </main>
- 
-  <script src="script.js"></script>
+
+  <script>
+    /* ============================================================
+       ÚNICO PUNTO DE EDICIÓN PARA EL MENÚ.
+       Añadir/quitar/renombrar un apartado = tocar solo este array.
+       ============================================================ */
+    var NAV_LINKS = [
+      { route: 'inicio', label: 'Inicio' },
+      { route: 'certificado-ciberseguridad', label: 'Certificado Ciberseguridad' },
+      { route: 'casos-analisis', label: 'Casos de análisis' },
+      { route: 'contacto', label: 'Contacto' }
+    ];
+
+    // Rutas que no están en el menú pero deben resaltar un apartado padre
+    var ACTIVE_ALIAS = {
+      'modulo-1': 'casos-analisis',
+      'modulo-2': 'casos-analisis',
+      'modulo-3': 'casos-analisis'
+    };
+
+    var TITLES = {
+      'inicio': 'Marina Quintana | Portfolio de Ciberseguridad',
+      'certificado-ciberseguridad': 'Certificado Ciberseguridad | Marina Quintana',
+      'casos-analisis': 'Casos de análisis | Marina Quintana',
+      'contacto': 'Contacto | Marina Quintana',
+      'modulo-1': 'Módulo 1 — Fundamentos | Marina Quintana',
+      'modulo-2': 'Módulo 2 — Network Security | Marina Quintana',
+      'modulo-3': 'Módulo 3 — Vulnerabilidades | Marina Quintana'
+    };
+
+    function buildNav() {
+      var nav = document.getElementById('nav-links');
+      nav.innerHTML = NAV_LINKS.map(function (item) {
+        return '<a href="#/' + item.route + '" data-route="' + item.route + '">' + item.label + '</a>';
+      }).join('');
+    }
+
+    function currentRoute() {
+      var r = location.hash.replace('#/', '') || 'inicio';
+      return document.querySelector('[data-page="' + r + '"]') ? r : 'inicio';
+    }
+
+    function render() {
+      var route = currentRoute();
+
+      document.querySelectorAll('.page').forEach(function (section) {
+        section.hidden = section.dataset.page !== route;
+      });
+
+      document.title = TITLES[route] || TITLES.inicio;
+
+      var activeNav = ACTIVE_ALIAS[route] || route;
+      document.querySelectorAll('#nav-links a').forEach(function (a) {
+        a.classList.toggle('active', a.dataset.route === activeNav);
+      });
+
+      window.scrollTo(0, 0);
+      if (isMobile()) setSidebarHidden(true);
+    }
+
+    function setSidebarHidden(hide) {
+      document.body.classList.toggle('sidebar-hidden', hide);
+      localStorage.setItem('sidebarHidden', hide);
+    }
+
+    function toggleSidebar() {
+      setSidebarHidden(!document.body.classList.contains('sidebar-hidden'));
+    }
+
+    function isMobile() {
+      return window.innerWidth <= 768;
+    }
+
+    window.addEventListener('hashchange', render);
+
+    window.addEventListener('DOMContentLoaded', function () {
+      buildNav();
+
+      var stored = localStorage.getItem('sidebarHidden');
+      if (stored === 'true') {
+        document.body.classList.add('sidebar-hidden');
+      }
+
+      render();
+
+      document.querySelector('.sidebar-backdrop').addEventListener('click', function () {
+        setSidebarHidden(true);
+      });
+    });
+  </script>
 </body>
 </html>
- 
