@@ -9,6 +9,12 @@
    TODO EL SITIO EN UN SOLO ARCHIVO.
    Para añadir/quitar un apartado del menú: busca NAV_LINKS más
    abajo en el <script> y edita ese único bloque.
+
+   DISEÑO DEL SIDEBAR: es un elemento normal del layout flex,
+   NUNCA position:fixed/overlay. Colapsado = solo iconos (64px).
+   Expandido = iconos + texto (220px). Al no ser un elemento
+   flotante, es estructuralmente imposible que tape el contenido:
+   main siempre ocupa el espacio que sobra, nunca lo comparte.
    ============================================================ */
 * { box-sizing: border-box; }
 
@@ -21,27 +27,41 @@ body {
   background-color: #ffffff;
 }
 
+/* --- Sidebar tipo rail --- */
 .sidebar {
-  width: 240px;
+  width: 220px;
   flex-shrink: 0;
   background-color: #042c53;
-  padding: 72px 16px 30px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  transition: width 0.2s ease;
 }
+body.sidebar-collapsed .sidebar { width: 64px; }
 
-.sidebar .name { color: #ffffff; font-size: 1.1em; font-weight: 600; margin-bottom: 6px; }
-.sidebar .tagline { color: #85b7eb; font-size: 0.85em; margin-bottom: 24px; }
+.sidebar-toggle-inline {
+  background: none; border: none; color: #b5d4f4; cursor: pointer;
+  font-size: 1.15em; text-align: left; padding: 18px 20px; flex-shrink: 0;
+}
+.sidebar-toggle-inline:hover { color: #ffffff; }
 
+.sidebar nav { padding: 8px 8px 0; }
 .sidebar nav a {
-  display: block; padding: 10px 12px; margin-bottom: 4px; border-radius: 6px;
-  color: #b5d4f4; text-decoration: none; font-size: 0.9em; cursor: pointer;
+  display: flex; align-items: center; gap: 12px; padding: 10px 12px; margin-bottom: 4px;
+  border-radius: 6px; color: #b5d4f4; text-decoration: none; font-size: 0.9em;
+  cursor: pointer;
 }
 .sidebar nav a:hover { background-color: #0c447c; color: #ffffff; }
 .sidebar nav a.active { background-color: #185fa5; color: #ffffff; font-weight: 500; }
 
-/* main SIEMPRE reserva 72px arriba: el botón ☰ (16px + 38px alto = 54px)
-   nunca puede tapar contenido, en NINGÚN estado ni ancho de pantalla.
-   Esta es la única regla que controla ese espacio — nada más la toca. */
-main { flex: 1; padding: 72px 50px 40px; max-width: 760px; line-height: 1.6; }
+.nav-icon { flex-shrink: 0; width: 20px; text-align: center; font-size: 1.05em; }
+.nav-label { overflow-wrap: break-word; line-height: 1.25; }
+body.sidebar-collapsed .nav-label { display: none; }
+body.sidebar-collapsed .sidebar nav a { justify-content: center; padding: 10px 0; }
+
+/* --- Contenido principal: centrado, con "aire" simétrico a los lados
+   en vez de una franja blanca solo a la derecha --- */
+main { flex: 0 1 760px; max-width: 760px; margin: 0 auto; padding: 40px 50px; line-height: 1.6; }
 
 h1 { color: #042c53; margin-top: 0; }
 h2 { border-left: 4px solid #378add; padding-left: 10px; color: #0c447c; }
@@ -53,22 +73,10 @@ li a:hover { text-decoration: underline; }
 
 .back-link { display: inline-block; margin-top: 16px; color: #185fa5; text-decoration: none; font-size: 0.9em; cursor: pointer; }
 
-/* --- Botón único de menú: fijo, siempre visible --- */
-.sidebar-toggle {
-  position: fixed; top: 16px; left: 16px; z-index: 30;
-  background: #185fa5; color: #ffffff; border: none; border-radius: 6px;
-  width: 38px; height: 38px; cursor: pointer; font-size: 1em;
-}
-
-body.sidebar-hidden .sidebar { display: none; }
-
-.sidebar-backdrop { display: none; }
-
 /* --- Páginas (secciones que se muestran/ocultan por hash) --- */
 .page[hidden] { display: none; }
 
-.hero-band { background: #ffffff; text-align: center; padding: 40px 30px; margin: -72px -50px 0; border-bottom: 1px solid #e6f1fb; }
-.hero-band-inner { padding-top: 64px; }
+.hero-band { background: #ffffff; text-align: center; padding: 40px 30px; border-bottom: 1px solid #e6f1fb; }
 .hero-band h1 { margin: 0 0 6px; font-size: 1.8em; }
 .hero-tagline { color: #185fa5; font-weight: 500; margin: 0 0 12px; }
 .hero-desc { color: #5f5e5a; max-width: 500px; margin: 0 auto; }
@@ -101,39 +109,16 @@ body.sidebar-hidden .sidebar { display: none; }
 .contact-page ul { max-width: 320px; }
 
 /* =========================================================
-   RESPONSIVE MÓVIL — sidebar pasa de panel fijo a overlay
+   RESPONSIVE MÓVIL — mismo mecanismo, rail más estrecho.
+   Sigue sin ser overlay: nunca tapa el contenido.
    ========================================================= */
 @media (max-width: 768px) {
-  body { display: block; }
+  /* Colapsado es el default en móvil, puro CSS, sin depender del JS */
+  .sidebar { width: 56px; }
+  body.sidebar-collapsed .sidebar { width: 56px; }
+  body:not(.sidebar-collapsed) .sidebar { width: 190px; }
 
-  main { padding: 72px 20px 32px; max-width: 100%; }
-  .hero-band { margin: -72px -20px 0; padding: 32px 20px; }
-
-  .sidebar {
-    position: fixed;
-    top: 0; left: 0; bottom: 0;
-    width: 78%;
-    max-width: 280px;
-    z-index: 25;
-    box-shadow: 2px 0 16px rgba(0,0,0,0.25);
-    transform: translateX(-100%);
-    transition: transform 0.25s ease;
-  }
-
-  /* Cerrado es el estado por defecto en móvil, puro CSS —
-     no depende de que el JS llegue a ejecutarse a tiempo.
-     Solo se abre añadiendo explícitamente .sidebar-open. */
-  body.sidebar-open .sidebar {
-    display: block;
-    transform: translateX(0);
-  }
-
-  body.sidebar-open .sidebar-backdrop {
-    display: block;
-    position: fixed; inset: 0;
-    background: rgba(4,44,83,0.4);
-    z-index: 20;
-  }
+  main { padding: 32px 20px; }
 
   .feature-band, .feature-band.reverse {
     flex-direction: column;
@@ -147,25 +132,20 @@ body.sidebar-hidden .sidebar { display: none; }
 </head>
 <body>
 
-  <div class="sidebar-backdrop"></div>
   <div class="sidebar">
-    <div class="name">Marina Quintana</div>
-    <div class="tagline">Portfolio de ciberseguridad</div>
+    <button class="sidebar-toggle-inline" onclick="toggleSidebar()" aria-label="Alternar menú">☰</button>
     <nav id="nav-links"></nav>
   </div>
-  <button class="sidebar-toggle" onclick="toggleSidebar()">☰</button>
 
   <main>
 
     <!-- INICIO -->
     <section class="page" data-page="inicio">
       <div class="hero-band">
-        <div class="hero-band-inner">
-          <h1>Marina Quintana</h1>
-          <p class="hero-tagline">Consultora de Seguridad · Análisis de riesgos</p>
-          <p class="hero-desc">Portfolio del Google Cybersecurity Professional Certificate, aplicado desde
-          criminología y consultoría de innovación al análisis de riesgo y cibercrimen corporativo.</p>
-        </div>
+        <h1>Marina Quintana</h1>
+        <p class="hero-tagline">Consultora de Seguridad · Análisis de riesgos</p>
+        <p class="hero-desc">Portfolio del Google Cybersecurity Professional Certificate, aplicado desde
+        criminología y consultoría de innovación al análisis de riesgo y cibercrimen corporativo.</p>
       </div>
     </section>
 
@@ -327,10 +307,10 @@ body.sidebar-hidden .sidebar { display: none; }
        Añadir/quitar/renombrar un apartado = tocar solo este array.
        ============================================================ */
     var NAV_LINKS = [
-      { route: 'inicio', label: 'Inicio' },
-      { route: 'certificado-ciberseguridad', label: 'Certificado Ciberseguridad' },
-      { route: 'casos-analisis', label: 'Casos de análisis' },
-      { route: 'contacto', label: 'Contacto' }
+      { route: 'inicio', label: 'Inicio', icon: '💼' },
+      { route: 'certificado-ciberseguridad', label: 'Certificado Ciberseguridad', icon: '🎓' },
+      { route: 'casos-analisis', label: 'Casos de análisis', icon: '🗂️' },
+      { route: 'contacto', label: 'Contacto', icon: '💬' }
     ];
 
     // Rutas que no están en el menú pero deben resaltar un apartado padre
@@ -353,7 +333,10 @@ body.sidebar-hidden .sidebar { display: none; }
     function buildNav() {
       var nav = document.getElementById('nav-links');
       nav.innerHTML = NAV_LINKS.map(function (item) {
-        return '<a href="#/' + item.route + '" data-route="' + item.route + '">' + item.label + '</a>';
+        return '<a href="#/' + item.route + '" data-route="' + item.route + '">' +
+          '<span class="nav-icon">' + item.icon + '</span>' +
+          '<span class="nav-label">' + item.label + '</span>' +
+          '</a>';
       }).join('');
     }
 
@@ -377,22 +360,16 @@ body.sidebar-hidden .sidebar { display: none; }
       });
 
       window.scrollTo(0, 0);
-      // Al navegar, el overlay móvil se cierra siempre (inofensivo en desktop:
-      // esta clase no se usa ahí).
-      document.body.classList.remove('sidebar-open');
     }
 
-    /* Desktop: .sidebar-hidden oculta el panel completo (modo foco).
-       Móvil: .sidebar-open revela el overlay (cerrado es el default en CSS,
-       sin depender del JS). Un mismo botón ☰, comportamiento correcto
-       según el ancho real en el momento del clic. */
+    /* Un único estado: .sidebar-collapsed. Presente = rail estrecho
+       (solo iconos). Ausente = expandido (iconos + texto). El sidebar
+       SIEMPRE forma parte del layout flex — nunca overlay, nunca
+       position:fixed — así que no puede tapar el contenido en
+       ningún ancho de pantalla, con o sin JS. */
     function toggleSidebar() {
-      if (isMobile()) {
-        document.body.classList.toggle('sidebar-open');
-      } else {
-        var hidden = document.body.classList.toggle('sidebar-hidden');
-        localStorage.setItem('sidebarHidden', hidden);
-      }
+      var collapsed = document.body.classList.toggle('sidebar-collapsed');
+      localStorage.setItem('sidebarCollapsed', collapsed);
     }
 
     function isMobile() {
@@ -404,17 +381,13 @@ body.sidebar-hidden .sidebar { display: none; }
     window.addEventListener('DOMContentLoaded', function () {
       buildNav();
 
-      // Preferencia de "panel oculto" solo aplica en desktop; en móvil
-      // el CSS ya arranca cerrado por defecto, no hace falta JS para eso.
-      if (!isMobile() && localStorage.getItem('sidebarHidden') === 'true') {
-        document.body.classList.add('sidebar-hidden');
+      // La preferencia guardada solo se restaura en desktop; en móvil
+      // el CSS ya arranca colapsado por defecto (ver media query).
+      if (!isMobile() && localStorage.getItem('sidebarCollapsed') === 'true') {
+        document.body.classList.add('sidebar-collapsed');
       }
 
       render();
-
-      document.querySelector('.sidebar-backdrop').addEventListener('click', function () {
-        document.body.classList.remove('sidebar-open');
-      });
     });
   </script>
 </body>
