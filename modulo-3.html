@@ -9,6 +9,7 @@
 <body>
 
   <div class="sidebar">
+    <button class="sidebar-toggle-close" onclick="toggleSidebar(true)">✕ Ocultar</button>
     <div class="name">Marina Quintana</div>
     <div class="tagline">Portfolio de ciberseguridad</div>
     <nav>
@@ -18,6 +19,7 @@
       <a href="modulo-3.html" class="active">M3 · Vulnerabilidades</a>
     </nav>
   </div>
+  <button class="sidebar-toggle-open" onclick="toggleSidebar(false)">☰</button>
 
   <main>
     <a class="back-link" href="index.html">← Volver al inicio</a>
@@ -41,5 +43,6 @@
     <a class="back-link" href="index.html">← Volver al inicio</a>
   </main>
 
+  <script src="script.js"></script>
 </body>
 </html>
