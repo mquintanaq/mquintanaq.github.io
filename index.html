@@ -7,110 +7,30 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-
+ 
+  <div class="sidebar-backdrop"></div>
   <div class="sidebar">
     <button class="sidebar-toggle-close" onclick="toggleSidebar(true)">✕ Ocultar</button>
     <div class="name">Marina Quintana</div>
     <div class="tagline">Portfolio de ciberseguridad</div>
     <nav>
-      <a href="#inicio" class="active">Inicio</a>
-      <a href="#destacadas">Áreas destacadas</a>
-      <a href="#todas">Todas las áreas</a>
-      <a href="#casos">Casos de análisis</a>
-      <a href="#contacto">Contacto</a>
+      <a href="index.html" class="active">Inicio</a>
+      <a href="certificado-ciberseguridad.html">Certificado Ciberseguridad</a>
+      <a href="casos-analisis.html">Casos de análisis</a>
+      <a href="contacto.html">Contacto</a>
     </nav>
   </div>
   <button class="sidebar-toggle-open" onclick="toggleSidebar(false)">☰</button>
-
+ 
   <main class="single-page">
-
     <section id="inicio" class="hero-band">
       <h1>Marina Quintana</h1>
-      <p class="hero-tagline">Consultora en I+D+i · Análisis de riesgo cibernético</p>
+      <p class="hero-tagline">Consultora de Seguridad · Análisis de riesgos</p>
       <p class="hero-desc">Portfolio del Google Cybersecurity Professional Certificate, aplicado desde
       criminología y consultoría de innovación al análisis de riesgo y cibercrimen corporativo.</p>
     </section>
-
-    <section id="destacadas">
-
-      <div class="feature-band feature-blue">
-        <div class="feature-icon">🛡️</div>
-        <div class="feature-text">
-          <h2>Gestión de riesgos de seguridad</h2>
-          <p>Evaluación y priorización de riesgos mediante matrices de probabilidad/impacto.
-          Aplicación del framework NIST RMF y elaboración de playbooks de respuesta accionables.
-          Traducción de amenaza técnica a riesgo de negocio cuantificable.</p>
-        </div>
-      </div>
-
-      <div class="feature-band feature-white reverse">
-        <div class="feature-icon">🔍</div>
-        <div class="feature-text">
-          <h2>Activos, amenazas y vulnerabilidades</h2>
-          <p>Inventariado de activos y análisis de superficie de ataque. Identificación de vectores
-          de explotación con manejo de CVE y CVSS. Perfilado de actores de amenaza mediante modelo
-          de motivación-capacidad-oportunidad, trasladado del análisis criminal al dominio digital.</p>
-        </div>
-      </div>
-
-      <div class="feature-band feature-blue">
-        <div class="feature-icon">🚨</div>
-        <div class="feature-text">
-          <h2>Detección y respuesta ante incidentes</h2>
-          <p>Gestión del ciclo de vida del incidente según NIST: detección, contención, erradicación,
-          recuperación. Correlación de eventos con herramientas SIEM, triaje de alertas y
-          reconstrucción de la cadena de ataque.</p>
-        </div>
-      </div>
-
-    </section>
-
-    <section id="todas">
-      <h2 class="section-title">Todas las áreas trabajadas</h2>
-      <div class="card-grid">
-
-        <div class="area-card" onclick="toggleCard(this)">
-          <div class="card-header"><span class="card-icon">🔐</span><span class="card-name">Fundamentos de ciberseguridad</span></div>
-          <p class="card-detail">Dominio de la tríada CIA, modelos de control de acceso y criptografía básica.
-          Aplicación de frameworks de referencia (NIST CSF, OWASP) y marco ético y normativo (GDPR).</p>
-        </div>
-
-        <div class="area-card" onclick="toggleCard(this)">
-          <div class="card-header"><span class="card-icon">🌐</span><span class="card-name">Redes y seguridad de red</span></div>
-          <p class="card-detail">Análisis de arquitectura TCP/IP y modelo OSI. Segmentación de red (VLANs,
-          subnetting) y configuración de mecanismos de defensa perimetral: firewalls, VPN, IDS/IPS.</p>
-        </div>
-
-        <div class="area-card" onclick="toggleCard(this)">
-          <div class="card-header"><span class="card-icon">💻</span><span class="card-name">Herramientas: Linux y SQL</span></div>
-          <p class="card-detail">Administración de sistemas mediante línea de comandos Linux: gestión de
-          permisos, procesos y logs. Consultas SQL complejas para extracción y cruce de datos de seguridad.</p>
-        </div>
-
-        <div class="area-card" onclick="toggleCard(this)">
-          <div class="card-header"><span class="card-icon">🐍</span><span class="card-name">Automatización con Python</span></div>
-          <p class="card-detail">Desarrollo de scripts para parsing y filtrado de logs, detección de patrones
-          mediante expresiones regulares e integración básica con APIs de threat intelligence.</p>
-        </div>
-
-      </div>
-    </section>
-
-    <section id="casos">
-      <h2 class="section-title">Casos de análisis en profundidad</h2>
-      <ul class="case-list">
-        <li><a href="modulo-1.html">Módulo 1 — Fundamentos de ciberseguridad</a></li>
-        <li><a href="modulo-2.html">Módulo 2 — Network Security</a></li>
-        <li><a href="modulo-3.html">Módulo 3 — Gestión de vulnerabilidades</a></li>
-      </ul>
-    </section>
-
-    <footer id="contacto">
-      📫 <a href="#">LinkedIn</a> · <a href="#">Email</a> · <a href="#">CV</a>
-    </footer>
-
   </main>
-
+ 
   <script src="script.js"></script>
 </body>
 </html>
