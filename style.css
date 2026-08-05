@@ -1,5 +1,5 @@
 * { box-sizing: border-box; }
- 
+
 body {
   font-family: 'Segoe UI', Arial, sans-serif;
   margin: 0;
@@ -8,116 +8,112 @@ body {
   color: #042c53;
   background-color: #ffffff;
 }
- 
+
 .sidebar {
   width: 240px;
   flex-shrink: 0;
   background-color: #042c53;
-  padding: 30px 16px;
+  padding: 64px 16px 30px;
 }
- 
+
 .sidebar .name { color: #ffffff; font-size: 1.1em; font-weight: 600; margin-bottom: 6px; }
 .sidebar .tagline { color: #85b7eb; font-size: 0.85em; margin-bottom: 24px; }
- 
+
 .sidebar nav a {
   display: block; padding: 10px 12px; margin-bottom: 4px; border-radius: 6px;
   color: #b5d4f4; text-decoration: none; font-size: 0.9em;
 }
 .sidebar nav a:hover { background-color: #0c447c; color: #ffffff; }
 .sidebar nav a.active { background-color: #185fa5; color: #ffffff; font-weight: 500; }
- 
+
 main { flex: 1; padding: 40px 50px; max-width: 760px; line-height: 1.6; }
- 
+
 h1 { color: #042c53; }
 h2 { border-left: 4px solid #378add; padding-left: 10px; color: #0c447c; }
- 
+
 ul { list-style: none; padding: 0; }
 li { margin-bottom: 10px; padding: 12px 16px; background-color: #e6f1fb; border-radius: 6px; }
 li a { color: #0c447c; text-decoration: none; font-weight: 500; }
 li a:hover { text-decoration: underline; }
- 
+
 .back-link { display: inline-block; margin-bottom: 16px; color: #185fa5; text-decoration: none; font-size: 0.9em; }
- 
+
 footer { border-top: 1px solid #e6f1fb; padding-top: 20px; margin-top: 30px; color: #5f5e5a; }
 footer a { color: #185fa5; text-decoration: none; }
- 
-/* --- Toggle del sidebar (desktop: ocultar/mostrar panel completo) --- */
-.sidebar-toggle-close { float: right; background: none; border: none; color: #b5d4f4; cursor: pointer; font-size: 0.8em; padding: 2px 6px; }
-.sidebar-toggle-close:hover { color: #ffffff; }
- 
-.sidebar-toggle-open {
-  display: none; position: fixed; top: 16px; left: 16px; z-index: 30;
+
+/* --- Botón único de menú: fijo, siempre visible, alterna el sidebar --- */
+.sidebar-toggle {
+  position: fixed; top: 16px; left: 16px; z-index: 30;
   background: #185fa5; color: #ffffff; border: none; border-radius: 6px;
   width: 38px; height: 38px; cursor: pointer; font-size: 1em;
 }
- 
+
 body.sidebar-hidden .sidebar { display: none; }
-body.sidebar-hidden .sidebar-toggle-open { display: block; }
- 
-/* Con el sidebar oculto, el botón ☰ queda fijo arriba a la izquierda:
+
+/* Con el sidebar oculto, el botón queda sobre el contenido:
    se reserva espacio para que nunca tape el título de la página. */
 body.sidebar-hidden .hero-band,
 body.sidebar-hidden .page-intro {
   padding-top: 64px;
 }
- 
+
 /* --- Overlay para cierre táctil en móvil --- */
 .sidebar-backdrop { display: none; }
- 
+
 /* --- Página única (hero) --- */
 .single-page { max-width: none; padding: 0; }
- 
+
 .hero-band { background: #ffffff; text-align: center; padding: 40px 30px; border-bottom: 1px solid #e6f1fb; }
 .hero-band h1 { margin: 0 0 6px; font-size: 1.8em; }
 .hero-tagline { color: #185fa5; font-weight: 500; margin: 0 0 12px; }
 .hero-desc { color: #5f5e5a; max-width: 500px; margin: 0 auto; }
- 
+
 .feature-band { display: flex; align-items: center; gap: 30px; padding: 36px 50px; }
 .feature-band.reverse { flex-direction: row-reverse; }
 .feature-blue { background: #e6f1fb; }
 .feature-white { background: #ffffff; }
- 
+
 .feature-icon {
   flex-shrink: 0; width: 80px; height: 80px; background: #185fa5; border-radius: 12px;
   display: flex; align-items: center; justify-content: center; font-size: 2em;
 }
- 
+
 .feature-text h2 { border: none; padding: 0; margin: 0 0 6px; }
 .feature-text p { margin: 0; color: #333; }
- 
+
 .page-intro { padding: 40px 50px 0; }
 .page-intro h1 { margin: 0 0 8px; font-size: 1.6em; }
 .page-intro p { color: #5f5e5a; max-width: 560px; }
- 
+
 .section-title { padding: 30px 50px 10px; border: none; }
- 
+
 .card-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 14px; padding: 0 50px 40px; }
- 
+
 .area-card { background: #185fa5; border-radius: 10px; padding: 16px; }
- 
+
 .card-header { display: flex; align-items: center; gap: 10px; }
 .card-icon { font-size: 1.3em; }
 .card-name { font-weight: 500; color: #ffffff; }
- 
+
 .card-detail { display: block; margin: 10px 0 0; font-size: 0.9em; color: #e6f1fb; }
- 
+
 .case-list { padding: 0 50px 40px; }
 #contacto { margin: 0 50px 40px; }
 .contact-page { padding: 0 50px 40px; }
 .contact-page ul { max-width: 320px; }
- 
+
 /* =========================================================
    RESPONSIVE MÓVIL — sidebar pasa de panel fijo a overlay
    ========================================================= */
 @media (max-width: 768px) {
   body { display: block; }
- 
+
   main, .page-intro, .contact-page {
     padding-left: 20px;
     padding-right: 20px;
   }
   main { padding-top: 64px; max-width: 100%; }
- 
+
   .sidebar {
     position: fixed;
     top: 0; left: 0; bottom: 0;
@@ -128,14 +124,14 @@ body.sidebar-hidden .page-intro {
     transform: translateX(0);
     transition: transform 0.25s ease;
   }
- 
+
   /* Oculto por defecto en móvil (JS añade sidebar-hidden al cargar) */
   body.sidebar-hidden .sidebar {
     display: block;
     transform: translateX(-100%);
   }
   body.sidebar-hidden .sidebar-backdrop { display: none; }
- 
+
   /* Visible = overlay + backdrop clicable */
   body:not(.sidebar-hidden) .sidebar-backdrop {
     display: block;
@@ -143,9 +139,7 @@ body.sidebar-hidden .page-intro {
     background: rgba(4,44,83,0.4);
     z-index: 20;
   }
- 
-  .sidebar-toggle-open { display: block; }
- 
+
   .hero-band { padding: 32px 20px; }
   .feature-band, .feature-band.reverse {
     flex-direction: column;
@@ -158,4 +152,3 @@ body.sidebar-hidden .page-intro {
   .case-list { padding: 0 20px 32px; }
   #contacto { margin: 0 20px 32px; }
 }
- 
