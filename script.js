@@ -3,10 +3,6 @@ function toggleSidebar(hide) {
   localStorage.setItem('sidebarHidden', hide);
 }
  
-function toggleCard(card) {
-  card.classList.toggle('expanded');
-}
- 
 function isMobile() {
   return window.innerWidth <= 768;
 }
@@ -38,3 +34,4 @@ window.addEventListener('DOMContentLoaded', function () {
     });
   });
 });
+ 
