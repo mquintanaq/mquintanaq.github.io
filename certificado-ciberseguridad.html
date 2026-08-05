@@ -7,10 +7,9 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
- 
+
   <div class="sidebar-backdrop"></div>
   <div class="sidebar">
-    <button class="sidebar-toggle-close" onclick="toggleSidebar(true)">✕ Ocultar</button>
     <div class="name">Marina Quintana</div>
     <div class="tagline">Portfolio de ciberseguridad</div>
     <nav>
@@ -20,16 +19,16 @@
       <a href="contacto.html">Contacto</a>
     </nav>
   </div>
-  <button class="sidebar-toggle-open" onclick="toggleSidebar(false)">☰</button>
- 
+  <button class="sidebar-toggle" onclick="toggleSidebar()">☰</button>
+
   <main class="single-page">
- 
+
     <div class="page-intro">
       <h1>Certificado Ciberseguridad</h1>
       <p>Áreas de conocimiento cubiertas por el Google Cybersecurity Professional Certificate,
       aplicadas con perspectiva de análisis de riesgo y criminología.</p>
     </div>
- 
+
     <section id="destacadas">
       <div class="feature-band feature-blue">
         <div class="feature-icon">🛡️</div>
@@ -40,7 +39,7 @@
           Traducción de amenaza técnica a riesgo de negocio cuantificable.</p>
         </div>
       </div>
- 
+
       <div class="feature-band feature-white reverse">
         <div class="feature-icon">🔍</div>
         <div class="feature-text">
@@ -50,7 +49,7 @@
           de motivación-capacidad-oportunidad, trasladado del análisis criminal al dominio digital.</p>
         </div>
       </div>
- 
+
       <div class="feature-band feature-blue">
         <div class="feature-icon">🚨</div>
         <div class="feature-text">
@@ -61,42 +60,42 @@
         </div>
       </div>
     </section>
- 
+
     <section id="todas">
       <h2 class="section-title">Todas las áreas trabajadas</h2>
       <div class="card-grid">
- 
+
         <div class="area-card">
           <div class="card-header"><span class="card-icon">🔐</span><span class="card-name">Fundamentos de ciberseguridad</span></div>
           <p class="card-detail">Dominio de la tríada CIA, modelos de control de acceso y criptografía básica.
           Aplicación de frameworks de referencia (NIST CSF, OWASP) y marco ético y normativo (GDPR).</p>
         </div>
- 
+
         <div class="area-card">
           <div class="card-header"><span class="card-icon">🌐</span><span class="card-name">Redes y seguridad de red</span></div>
           <p class="card-detail">Análisis de arquitectura TCP/IP y modelo OSI. Segmentación de red (VLANs,
           subnetting) y configuración de mecanismos de defensa perimetral: firewalls, VPN, IDS/IPS.</p>
         </div>
- 
+
         <div class="area-card">
           <div class="card-header"><span class="card-icon">💻</span><span class="card-name">Herramientas: Linux y SQL</span></div>
           <p class="card-detail">Administración de sistemas mediante línea de comandos Linux: gestión de
           permisos, procesos y logs. Consultas SQL complejas para extracción y cruce de datos de seguridad.</p>
         </div>
- 
+
         <div class="area-card">
           <div class="card-header"><span class="card-icon">🐍</span><span class="card-name">Automatización con Python</span></div>
           <p class="card-detail">Desarrollo de scripts para parsing y filtrado de logs, detección de patrones
           mediante expresiones regulares e integración básica con APIs de threat intelligence.</p>
         </div>
- 
+
       </div>
     </section>
- 
+
     <a class="back-link" style="margin: 0 50px 40px; display: block;" href="index.html">← Volver al inicio</a>
- 
+
   </main>
- 
+
   <script src="script.js"></script>
 </body>
 </html>
