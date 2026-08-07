@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Marina Quintana | Consultora | Analisita Criminal </title>
+<title>Marina Quintana | Consultora | Analista Criminal</title>
 <style>
 /* ============================================================
    TODO EL SITIO EN UN SOLO ARCHIVO.
@@ -110,6 +110,12 @@ li a:hover { text-decoration: underline; }
 .card-detail { display: block; margin: 10px 0 0; font-size: 0.9em; color: #e6f1fb; }
 
 .contact-page ul { max-width: 320px; }
+.contact-page li { display: flex; align-items: center; gap: 12px; }
+.contact-icon {
+  flex-shrink: 0; width: 32px; height: 32px; background: #185fa5; border-radius: 8px;
+  display: flex; align-items: center; justify-content: center;
+}
+.contact-icon svg { width: 18px; height: 18px; display: block; }
 
 /* =========================================================
    RESPONSIVE MÓVIL — mismo mecanismo, rail más estrecho.
@@ -147,13 +153,49 @@ li a:hover { text-decoration: underline; }
       <div class="hero-band">
         <h1>Marina Quintana</h1>
         <p class="hero-tagline">Consultora · Analista Criminal</p>
-        <p class="hero-desc"> Soy consultora con formación en criminología y análisis criminal, actualmente esoty orientando mi carrera profesional hacia la ciberseguridad.</p> 
-          <p> Me gradué en Criminología, donde desarrollé una sólida base de análisis, investigación y evaluación de riesgos.</p> 
-          <p>Posteriormente cursé un Máster Profesional en Análisis Criminal y criminología aplicada, 
-           que me permitió profundizar en metodologías de investigación, inteligencia, análisis de la información y apoyo en la toma de decisiones.</p> 
-          <p>Actualmente trabajo como consultora de negocios, participando en la gestión y coodinación de proyectos de innovación, donde estoy adquiriendo experiencia en organización, comunicación con el cliente, elaboración de documentación técnica y gestión de convocatorias públicas en I+d+i.</p> 
-           En paralelo, estoy complementando mi perfil con formación en ciberseguridad. Mi objetivo es desarrollar una carrera en el ámbito de la seguridad, combinando mis capacidades analíticas con conocimientos técnicos para contribuir a la protección de organizaciones frente a amenzas digitales.</p> 
-          <p> En esta página se encuentra mi proceso de aprendizaje, los proyectos que voy desarrollando y los casos prácticos con los que continúo mejorando mis competencias.</p>
+        <p class="hero-desc">Consultora con formación en criminología y análisis criminal, actualmente
+        orientando mi carrera profesional hacia la ciberseguridad.</p>
+      </div>
+
+      <div class="feature-band">
+        <div class="feature-icon"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="#fefbfb" viewBox="0 0 256 256"><path d="M226.53,56.41l-96-32a8,8,0,0,0-5.06,0l-96,32A8,8,0,0,0,24,64v80a8,8,0,0,0,16,0V75.1L73.59,86.29a64,64,0,0,0,20.65,88.05c-18,7.06-33.56,19.83-44.94,37.29a8,8,0,1,0,13.4,8.74C77.77,197.25,101.57,184,128,184s50.23,13.25,65.3,36.37a8,8,0,0,0,13.4-8.74c-11.38-17.46-27-30.23-44.94-37.29a64,64,0,0,0,20.65-88l44.12-14.7a8,8,0,0,0,0-15.18ZM176,120A48,48,0,1,1,89.35,91.55l36.12,12a8,8,0,0,0,5.06,0l36.12-12A47.89,47.89,0,0,1,176,120ZM128,87.57,57.3,64,128,40.43,198.7,64Z"></path></svg></div>
+        <div class="feature-text">
+          <h2>Formación</h2>
+          <p>Graduada en Criminología, donde desarrollé una sólida base de análisis, investigación
+          y evaluación de riesgos. Posteriormente cursé un Máster Profesional en Análisis Criminal y
+          criminología aplicada, profundizando en metodologías de investigación, inteligencia, análisis
+          de la información y apoyo en la toma de decisiones.</p>
+        </div>
+      </div>
+
+      <div class="feature-band reverse">
+        <div class="feature-icon"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="#fefbfb" viewBox="0 0 256 256"><path d="M216,56H176V48a24,24,0,0,0-24-24H104A24,24,0,0,0,80,48v8H40A16,16,0,0,0,24,72V200a16,16,0,0,0,16,16H216a16,16,0,0,0,16-16V72A16,16,0,0,0,216,56ZM96,48a8,8,0,0,1,8-8h48a8,8,0,0,1,8,8v8H96ZM216,72v41.61A184,184,0,0,1,128,136a184.07,184.07,0,0,1-88-22.38V72Zm0,128H40V131.64A200.19,200.19,0,0,0,128,152a200.25,200.25,0,0,0,88-20.37V200ZM104,112a8,8,0,0,1,8-8h32a8,8,0,0,1,0,16H112A8,8,0,0,1,104,112Z"></path></svg></div>
+        <div class="feature-text">
+          <h2>Experiencia actual</h2>
+          <p>Trabajo como consultora de negocios, participando en la gestión y coordinación de
+          proyectos de innovación. Estoy adquiriendo experiencia en organización, comunicación con
+          el cliente, elaboración de documentación técnica y gestión de convocatorias públicas en I+D+i.</p>
+        </div>
+      </div>
+
+      <div class="feature-band">
+        <div class="feature-icon"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="#fefbfb" viewBox="0 0 256 256"><path d="M216,72a8,8,0,0,1-8,8H176a8,8,0,0,1,0-16h32A8,8,0,0,1,216,72Zm-8,24H176a8,8,0,0,0,0,16h32a8,8,0,0,0,0-16Zm40-48V208a16,16,0,0,1-16,16H152a16,16,0,0,1-16-16V192H96v16h16a8,8,0,0,1,0,16H64a8,8,0,0,1,0-16H80V192H32A24,24,0,0,1,8,168V96A24,24,0,0,1,32,72H136V48a16,16,0,0,1,16-16h80A16,16,0,0,1,248,48ZM136,176V88H32a8,8,0,0,0-8,8v72a8,8,0,0,0,8,8Zm96,32V48H152V208h80Zm-40-40a12,12,0,1,0,12,12A12,12,0,0,0,192,168Z"></path></svg></div>
+        <div class="feature-text">
+          <h2>Hacia la ciberseguridad</h2>
+          <p>En paralelo, estoy complementando mi perfil con formación en ciberseguridad. Mi objetivo
+          es desarrollar una carrera en el ámbito de la seguridad, combinando mis capacidades analíticas
+          con conocimientos técnicos para contribuir a la protección de organizaciones frente a
+          amenazas digitales.</p>
+        </div>
+      </div>
+
+      <div class="feature-band reverse">
+        <div class="feature-icon"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="#fefbfb" viewBox="0 0 256 256"><path d="M152,80a8,8,0,0,1,8-8h88a8,8,0,0,1,0,16H160A8,8,0,0,1,152,80Zm96,40H160a8,8,0,0,0,0,16h88a8,8,0,0,0,0-16Zm0,48H184a8,8,0,0,0,0,16h64a8,8,0,0,0,0-16Zm-96.25,22a8,8,0,0,1-5.76,9.74,7.55,7.55,0,0,1-2,.26,8,8,0,0,1-7.75-6c-6.16-23.94-30.34-42-56.25-42s-50.09,18.05-56.25,42a8,8,0,0,1-15.5-4c5.59-21.71,21.84-39.29,42.46-48a48,48,0,1,1,58.58,0C129.91,150.71,146.16,168.29,151.75,190ZM80,136a32,32,0,1,0-32-32A32,32,0,0,0,80,136Z"></path></svg></div>
+        <div class="feature-text">
+          <h2>Qué vas a encontrar aquí</h2>
+          <p>En esta página está mi proceso de aprendizaje, los proyectos que voy desarrollando y los
+          casos prácticos con los que continúo mejorando mis competencias.</p>
+        </div>
       </div>
     </section>
 
@@ -161,7 +203,7 @@ li a:hover { text-decoration: underline; }
     <section class="page" data-page="certificado-ciberseguridad" hidden>
       <div class="page-intro">
         <h1>Certificado Profesional de Ciberseguridad de Google</h1>
-         <p>Como primer paso en mi transición hacia la ciberseugirdad completé el Certificado Profesional de Ciberseguridad de Google.</p>
+         <p>Como primer paso en mi transición hacia la ciberseguridad completé el Certificado Profesional de Ciberseguridad de Google.</p>
          <p>Durante esta formación adquirí conocimientos tanto teóricos como prácticos sobre los fundamentos de la seguridad de la información y el trabajo de una analista de ciberseguridad.</p>
       </div>
 
@@ -244,8 +286,8 @@ li a:hover { text-decoration: underline; }
       </div>
       <div class="contact-page">
         <ul>
-          <li> <a href="https://www.linkedin.com/in/marina-quintana-ab3595319">LinkedIn</a></li>
-          <li> <a href="mailto:marinaquerendez@gmail.com">Email</a></li>
+          <li><span class="contact-icon"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="#fefbfb" viewBox="0 0 256 256"><path d="M216,24H40A16,16,0,0,0,24,40V216a16,16,0,0,0,16,16H216a16,16,0,0,0,16-16V40A16,16,0,0,0,216,24Zm0,192H40V40H216V216ZM96,112v64a8,8,0,0,1-16,0V112a8,8,0,0,1,16,0Zm88,28v36a8,8,0,0,1-16,0V140a20,20,0,0,0-40,0v36a8,8,0,0,1-16,0V112a8,8,0,0,1,15.79-1.78A36,36,0,0,1,184,140ZM100,84A12,12,0,1,1,88,72,12,12,0,0,1,100,84Z"></path></svg></span> <a href="https://www.linkedin.com/in/marina-quintana-ab3595319">LinkedIn</a></li>
+          <li><span class="contact-icon"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="#fefbfb" viewBox="0 0 256 256"><path d="M128,24a104,104,0,0,0,0,208c21.51,0,44.1-6.48,60.43-17.33a8,8,0,0,0-8.86-13.33C166,210.38,146.21,216,128,216a88,88,0,1,1,88-88c0,26.45-10.88,32-20,32s-20-5.55-20-32V88a8,8,0,0,0-16,0v4.26a48,48,0,1,0,5.93,65.1c6,12,16.35,18.64,30.07,18.64,22.54,0,36-17.94,36-48A104.11,104.11,0,0,0,128,24Zm0,136a32,32,0,1,1,32-32A32,32,0,0,1,128,160Z"></path></svg></span> <a href="mailto:marinaquerendez@gmail.com">Email</a></li>
         </ul>
       </div>
       <a class="back-link" href="#/inicio">← Volver al inicio</a>
@@ -324,7 +366,7 @@ li a:hover { text-decoration: underline; }
     };
 
     var TITLES = {
-      'inicio': 'Marina Quintana | Consultora | Analisita Criminal',
+      'inicio': 'Marina Quintana | Consultora | Analista Criminal',
       'certificado-ciberseguridad': 'Certificado Ciberseguridad | Marina Quintana',
       'casos-analisis': 'Casos de análisis | Marina Quintana',
       'contacto': 'Contacto | Marina Quintana',
