@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -9,7 +10,7 @@
    TODO EL SITIO EN UN SOLO ARCHIVO.
    Para añadir/quitar un apartado del menú: busca NAV_LINKS más
    abajo en el <script> y edita ese único bloque.
-
+ 
    DISEÑO DEL SIDEBAR: es un elemento normal del layout flex,
    NUNCA position:fixed/overlay. Colapsado = solo iconos (64px).
    Expandido = iconos + texto (220px). Al no ser un elemento
@@ -17,7 +18,7 @@
    main siempre ocupa el espacio que sobra, nunca lo comparte.
    ============================================================ */
 * { box-sizing: border-box; }
-
+ 
 body {
   font-family: 'Segoe UI', Arial, sans-serif;
   margin: 0;
@@ -26,7 +27,7 @@ body {
   color: #042c53;
   background-color: #ffffff;
 }
-
+ 
 /* --- Sidebar tipo rail --- */
 .sidebar {
   width: 220px;
@@ -38,13 +39,13 @@ body {
   transition: width 0.2s ease;
 }
 body.sidebar-collapsed .sidebar { width: 64px; }
-
+ 
 .sidebar-toggle-inline {
   background: none; border: none; color: #b5d4f4; cursor: pointer;
   font-size: 1.15em; text-align: left; padding: 18px 20px; flex-shrink: 0;
 }
 .sidebar-toggle-inline:hover { color: #ffffff; }
-
+ 
 .sidebar nav { padding: 8px 8px 0; }
 .sidebar nav a {
   display: flex; align-items: center; gap: 12px; padding: 10px 12px; margin-bottom: 4px;
@@ -53,62 +54,63 @@ body.sidebar-collapsed .sidebar { width: 64px; }
 }
 .sidebar nav a:hover { background-color: #0c447c; color: #ffffff; }
 .sidebar nav a.active { background-color: #185fa5; color: #ffffff; font-weight: 500; }
-
+ 
 .nav-icon { flex-shrink: 0; width: 20px; text-align: center; font-size: 1.05em; }
 .nav-icon svg { width: 20px; height: 20px; display: block; }
 .nav-label { overflow-wrap: break-word; line-height: 1.25; }
 body.sidebar-collapsed .nav-label { display: none; }
 body.sidebar-collapsed .sidebar nav a { justify-content: center; padding: 10px 0; }
-
+ 
 /* --- Contenido principal: centrado, con "aire" simétrico a los lados
    en vez de una franja blanca solo a la derecha --- */
 main { flex: 0 1 760px; max-width: 760px; margin: 0 auto; padding: 40px 50px; line-height: 1.6; }
-
+main p { text-align: justify; hyphens: auto; }
+ 
 h1 { color: #042c53; margin-top: 0; }
 h2 { border-left: 4px solid #378add; padding-left: 10px; color: #0c447c; }
-
+ 
 ul { list-style: none; padding: 0; }
 li { margin-bottom: 10px; padding: 12px 16px; background-color: #e6f1fb; border-radius: 6px; }
 li a { color: #0c447c; text-decoration: none; font-weight: 500; cursor: pointer; }
 li a:hover { text-decoration: underline; }
-
+ 
 .back-link { display: inline-block; margin-top: 16px; color: #185fa5; text-decoration: none; font-size: 0.9em; cursor: pointer; }
-
+ 
 /* --- Páginas (secciones que se muestran/ocultan por hash) --- */
 .page[hidden] { display: none; }
-
+ 
 .hero-band { background: #ffffff; text-align: center; padding: 40px 30px; border-bottom: 1px solid #e6f1fb; }
 .hero-band h1 { margin: 0 0 6px; font-size: 1.8em; }
 .hero-tagline { color: #185fa5; font-weight: 500; margin: 0 0 12px; }
 .hero-desc { color: #5f5e5a; max-width: 500px; margin: 0 auto; }
-
+ 
 .feature-band { display: flex; align-items: center; gap: 30px; padding: 36px 0; }
 .feature-band.reverse { flex-direction: row-reverse; }
-
+ 
 .feature-icon {
   flex-shrink: 0; width: 80px; height: 80px; background: #185fa5; border-radius: 12px;
   display: flex; align-items: center; justify-content: center; font-size: 2em;
 }
 .feature-icon svg { width: 40px; height: 40px; }
-
+ 
 .feature-text h2 { border: none; padding: 0; margin: 0 0 6px; }
 .feature-text p { margin: 0; color: #333; }
-
+ 
 .page-intro p { color: #5f5e5a; max-width: 560px; }
-
+ 
 .section-title { margin: 30px 0 10px; }
-
+ 
 .card-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 14px; margin-bottom: 20px; }
-
+ 
 .area-card { background: #185fa5; border-radius: 10px; padding: 16px; }
-
+ 
 .card-header { display: flex; align-items: center; gap: 10px; }
 .card-icon { font-size: 1.3em; }
 .card-icon svg { width: 22px; height: 22px; display: block; }
 .card-name { font-weight: 500; color: #ffffff; }
-
+ 
 .card-detail { display: block; margin: 10px 0 0; font-size: 0.9em; color: #e6f1fb; }
-
+ 
 .contact-page ul { max-width: 320px; }
 .contact-page li { display: flex; align-items: center; gap: 12px; }
 .contact-icon {
@@ -116,7 +118,7 @@ li a:hover { text-decoration: underline; }
   display: flex; align-items: center; justify-content: center;
 }
 .contact-icon svg { width: 18px; height: 18px; display: block; }
-
+ 
 /* =========================================================
    RESPONSIVE MÓVIL — mismo mecanismo, rail más estrecho.
    Sigue sin ser overlay: nunca tapa el contenido.
@@ -126,9 +128,9 @@ li a:hover { text-decoration: underline; }
   .sidebar { width: 56px; }
   body.sidebar-collapsed .sidebar { width: 56px; }
   body:not(.sidebar-collapsed) .sidebar { width: 190px; }
-
+ 
   main { padding: 32px 20px; }
-
+ 
   .feature-band, .feature-band.reverse {
     flex-direction: column;
     text-align: center;
@@ -140,14 +142,14 @@ li a:hover { text-decoration: underline; }
 </style>
 </head>
 <body>
-
+ 
   <div class="sidebar">
     <button class="sidebar-toggle-inline" onclick="toggleSidebar()" aria-label="Alternar menú">☰</button>
     <nav id="nav-links"></nav>
   </div>
-
+ 
   <main>
-
+ 
     <!-- INICIO -->
     <section class="page" data-page="inicio">
       <div class="hero-band">
@@ -156,7 +158,7 @@ li a:hover { text-decoration: underline; }
         <p class="hero-desc">Consultora con formación en criminología y análisis criminal, actualmente
         orientando mi carrera profesional hacia la ciberseguridad.</p>
       </div>
-
+ 
       <div class="feature-band">
         <div class="feature-icon"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="#fefbfb" viewBox="0 0 256 256"><path d="M226.53,56.41l-96-32a8,8,0,0,0-5.06,0l-96,32A8,8,0,0,0,24,64v80a8,8,0,0,0,16,0V75.1L73.59,86.29a64,64,0,0,0,20.65,88.05c-18,7.06-33.56,19.83-44.94,37.29a8,8,0,1,0,13.4,8.74C77.77,197.25,101.57,184,128,184s50.23,13.25,65.3,36.37a8,8,0,0,0,13.4-8.74c-11.38-17.46-27-30.23-44.94-37.29a64,64,0,0,0,20.65-88l44.12-14.7a8,8,0,0,0,0-15.18ZM176,120A48,48,0,1,1,89.35,91.55l36.12,12a8,8,0,0,0,5.06,0l36.12-12A47.89,47.89,0,0,1,176,120ZM128,87.57,57.3,64,128,40.43,198.7,64Z"></path></svg></div>
         <div class="feature-text">
@@ -167,7 +169,7 @@ li a:hover { text-decoration: underline; }
           de la información y apoyo en la toma de decisiones.</p>
         </div>
       </div>
-
+ 
       <div class="feature-band reverse">
         <div class="feature-icon"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="#fefbfb" viewBox="0 0 256 256"><path d="M216,56H176V48a24,24,0,0,0-24-24H104A24,24,0,0,0,80,48v8H40A16,16,0,0,0,24,72V200a16,16,0,0,0,16,16H216a16,16,0,0,0,16-16V72A16,16,0,0,0,216,56ZM96,48a8,8,0,0,1,8-8h48a8,8,0,0,1,8,8v8H96ZM216,72v41.61A184,184,0,0,1,128,136a184.07,184.07,0,0,1-88-22.38V72Zm0,128H40V131.64A200.19,200.19,0,0,0,128,152a200.25,200.25,0,0,0,88-20.37V200ZM104,112a8,8,0,0,1,8-8h32a8,8,0,0,1,0,16H112A8,8,0,0,1,104,112Z"></path></svg></div>
         <div class="feature-text">
@@ -177,7 +179,7 @@ li a:hover { text-decoration: underline; }
           el cliente, elaboración de documentación técnica y gestión de convocatorias públicas en I+D+i.</p>
         </div>
       </div>
-
+ 
       <div class="feature-band">
         <div class="feature-icon"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="#fefbfb" viewBox="0 0 256 256"><path d="M216,72a8,8,0,0,1-8,8H176a8,8,0,0,1,0-16h32A8,8,0,0,1,216,72Zm-8,24H176a8,8,0,0,0,0,16h32a8,8,0,0,0,0-16Zm40-48V208a16,16,0,0,1-16,16H152a16,16,0,0,1-16-16V192H96v16h16a8,8,0,0,1,0,16H64a8,8,0,0,1,0-16H80V192H32A24,24,0,0,1,8,168V96A24,24,0,0,1,32,72H136V48a16,16,0,0,1,16-16h80A16,16,0,0,1,248,48ZM136,176V88H32a8,8,0,0,0-8,8v72a8,8,0,0,0,8,8Zm96,32V48H152V208h80Zm-40-40a12,12,0,1,0,12,12A12,12,0,0,0,192,168Z"></path></svg></div>
         <div class="feature-text">
@@ -188,7 +190,7 @@ li a:hover { text-decoration: underline; }
           amenazas digitales.</p>
         </div>
       </div>
-
+ 
       <div class="feature-band reverse">
         <div class="feature-icon"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="#fefbfb" viewBox="0 0 256 256"><path d="M152,80a8,8,0,0,1,8-8h88a8,8,0,0,1,0,16H160A8,8,0,0,1,152,80Zm96,40H160a8,8,0,0,0,0,16h88a8,8,0,0,0,0-16Zm0,48H184a8,8,0,0,0,0,16h64a8,8,0,0,0,0-16Zm-96.25,22a8,8,0,0,1-5.76,9.74,7.55,7.55,0,0,1-2,.26,8,8,0,0,1-7.75-6c-6.16-23.94-30.34-42-56.25-42s-50.09,18.05-56.25,42a8,8,0,0,1-15.5-4c5.59-21.71,21.84-39.29,42.46-48a48,48,0,1,1,58.58,0C129.91,150.71,146.16,168.29,151.75,190ZM80,136a32,32,0,1,0-32-32A32,32,0,0,0,80,136Z"></path></svg></div>
         <div class="feature-text">
@@ -198,7 +200,7 @@ li a:hover { text-decoration: underline; }
         </div>
       </div>
     </section>
-
+ 
     <!-- CERTIFICADO CIBERSEGURIDAD -->
     <section class="page" data-page="certificado-ciberseguridad" hidden>
       <div class="page-intro">
@@ -206,7 +208,7 @@ li a:hover { text-decoration: underline; }
          <p>Como primer paso en mi transición hacia la ciberseguridad completé el Certificado Profesional de Ciberseguridad de Google.</p>
          <p>Durante esta formación adquirí conocimientos tanto teóricos como prácticos sobre los fundamentos de la seguridad de la información y el trabajo de una analista de ciberseguridad.</p>
       </div>
-
+ 
       <div class="feature-band">
         <div class="feature-icon"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="#fefbfb" viewBox="0 0 256 256"><path d="M208,40H48A16,16,0,0,0,32,56v56c0,52.72,25.52,84.67,46.93,102.19,23.06,18.86,46,25.27,47,25.53a8,8,0,0,0,4.2,0c1-.26,23.91-6.67,47-25.53C198.48,196.67,224,164.72,224,112V56A16,16,0,0,0,208,40Zm0,16v56c0,2.71-.08,5.37-.23,8H136V56ZM48,56h72v64H48.23c-.15-2.63-.23-5.29-.23-8Zm2.06,80H120v84.55a130.85,130.85,0,0,1-30.93-18.74C67.92,184.51,54.87,162.44,50.08,136ZM167.4,201.42A131.31,131.31,0,0,1,136,220.53V136h69.91C201.16,162.24,188.27,184.18,167.4,201.42Z"></path></svg></div>
         <div class="feature-text">
@@ -216,7 +218,7 @@ li a:hover { text-decoration: underline; }
           Traducción de amenaza técnica a riesgo de negocio cuantificable.</p>
         </div>
       </div>
-
+ 
       <div class="feature-band reverse">
         <div class="feature-icon"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="#fefbfb" viewBox="0 0 256 256"><path d="M229.66,218.34l-50.07-50.06a88.11,88.11,0,1,0-11.31,11.31l50.06,50.07a8,8,0,0,0,11.32-11.32ZM40,112a72,72,0,1,1,72,72A72.08,72.08,0,0,1,40,112Z"></path></svg></div>
         <div class="feature-text">
@@ -226,7 +228,7 @@ li a:hover { text-decoration: underline; }
           de motivación-capacidad-oportunidad, trasladado del análisis criminal al dominio digital.</p>
         </div>
       </div>
-
+ 
       <div class="feature-band">
         <div class="feature-icon"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="#fefbfb" viewBox="0 0 256 256"><path d="M224,71.1a8,8,0,0,1-10.78-3.42,94.13,94.13,0,0,0-33.46-36.91,8,8,0,1,1,8.54-13.54,111.46,111.46,0,0,1,39.12,43.09A8,8,0,0,1,224,71.1ZM35.71,72a8,8,0,0,0,7.1-4.32A94.13,94.13,0,0,1,76.27,30.77a8,8,0,1,0-8.54-13.54A111.46,111.46,0,0,0,28.61,60.32,8,8,0,0,0,35.71,72Zm186.1,103.94A16,16,0,0,1,208,200H167.2a40,40,0,0,1-78.4,0H48a16,16,0,0,1-13.79-24.06C43.22,160.39,48,138.28,48,112a80,80,0,0,1,160,0C208,138.27,212.78,160.38,221.81,175.94ZM150.62,200H105.38a24,24,0,0,0,45.24,0ZM208,184c-10.64-18.27-16-42.49-16-72a64,64,0,0,0-128,0c0,29.52-5.38,53.74-16,72Z"></path></svg></div>
         <div class="feature-text">
@@ -236,7 +238,7 @@ li a:hover { text-decoration: underline; }
           reconstrucción de la cadena de ataque.</p>
         </div>
       </div>
-
+ 
       <h2 class="section-title">Competencias desarrolladas</h2>
       <div class="card-grid">
         <div class="area-card">
@@ -260,10 +262,10 @@ li a:hover { text-decoration: underline; }
           mediante expresiones regulares e integración básica con APIs de threat intelligence.</p>
         </div>
       </div>
-
+ 
       <a class="back-link" href="#/inicio">← Volver al inicio</a>
     </section>
-
+ 
     <!-- CASOS DE ANÁLISIS -->
     <section class="page" data-page="casos-analisis" hidden>
       <div class="page-intro">
@@ -277,7 +279,7 @@ li a:hover { text-decoration: underline; }
       </ul>
       <a class="back-link" href="#/inicio">← Volver al inicio</a>
     </section>
-
+ 
     <!-- CONTACTO -->
     <section class="page" data-page="contacto" hidden>
       <div class="page-intro">
@@ -292,7 +294,7 @@ li a:hover { text-decoration: underline; }
       </div>
       <a class="back-link" href="#/inicio">← Volver al inicio</a>
     </section>
-
+ 
     <!-- EJERCICIO 1 -->
     <section class="page" data-page="ejercicio-1" hidden>
       <h1>Ejercicio 1 — Plataformas "Hack the box" y "Try Hack me"</h1>
@@ -309,7 +311,7 @@ li a:hover { text-decoration: underline; }
       <p><em>[Tu reflexión conectando esto con tu experiencia consultora/analítica]</em></p>
       <a class="back-link" href="#/casos-analisis">← Volver a Casos de análisis</a>
     </section>
-
+ 
     <!-- EJERCICIO 2 -->
     <section class="page" data-page="ejercicio-2" hidden>
       <h1>Ejercicio 2 — </h1>
@@ -326,7 +328,7 @@ li a:hover { text-decoration: underline; }
       <p><em>[Tu reflexión conectando esto con tu experiencia consultora/analítica]</em></p>
       <a class="back-link" href="#/casos-analisis">← Volver a Casos de análisis</a>
     </section>
-
+ 
     <!-- EJERCICIO 3 -->
     <section class="page" data-page="ejercicio-3" hidden>
       <h1>Ejercicio 3 — </h1>
@@ -343,9 +345,9 @@ li a:hover { text-decoration: underline; }
       <p><em>[Tu reflexión conectando esto con tu experiencia consultora/analítica]</em></p>
       <a class="back-link" href="#/casos-analisis">← Volver a Casos de análisis</a>
     </section>
-
+ 
   </main>
-
+ 
   <script>
     /* ============================================================
        ÚNICO PUNTO DE EDICIÓN PARA EL MENÚ.
@@ -357,14 +359,14 @@ li a:hover { text-decoration: underline; }
       { route: 'casos-analisis', label: 'Casos de análisis', icon: '<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="#fefbfb" viewBox="0 0 256 256"><path d="M231.65,194.55,198.46,36.75a16,16,0,0,0-19-12.39L132.65,34.42a16.08,16.08,0,0,0-12.3,19l33.19,157.8A16,16,0,0,0,169.16,224a16.25,16.25,0,0,0,3.38-.36l46.81-10.06A16.09,16.09,0,0,0,231.65,194.55ZM136,50.15c0-.06,0-.09,0-.09l46.8-10,3.33,15.87L139.33,66Zm6.62,31.47,46.82-10.05,3.34,15.9L146,97.53Zm6.64,31.57,46.82-10.06,13.3,63.24-46.82,10.06ZM216,197.94l-46.8,10-3.33-15.87L212.67,182,216,197.85C216,197.91,216,197.94,216,197.94ZM104,32H56A16,16,0,0,0,40,48V208a16,16,0,0,0,16,16h48a16,16,0,0,0,16-16V48A16,16,0,0,0,104,32ZM56,48h48V64H56Zm0,32h48v96H56Zm48,128H56V192h48v16Z"></path></svg>' },
       { route: 'contacto', label: 'Contacto', icon: '<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="#fefbfb" viewBox="0 0 256 256"><path d="M216,48H40A16,16,0,0,0,24,64V224a15.85,15.85,0,0,0,9.24,14.5A16.13,16.13,0,0,0,40,240a15.89,15.89,0,0,0,10.25-3.78l.09-.07L83,208H216a16,16,0,0,0,16-16V64A16,16,0,0,0,216,48ZM40,224h0ZM216,192H80a8,8,0,0,0-5.23,1.95L40,224V64H216ZM88,112a8,8,0,0,1,8-8h64a8,8,0,0,1,0,16H96A8,8,0,0,1,88,112Zm0,32a8,8,0,0,1,8-8h64a8,8,0,1,1,0,16H96A8,8,0,0,1,88,144Z"></path></svg>' }
     ];
-
+ 
     // Rutas que no están en el menú pero deben resaltar un apartado padre
     var ACTIVE_ALIAS = {
       'ejercicio-1': 'casos-analisis',
       'ejercicio-2': 'casos-analisis',
       'ejercicio-3': 'casos-analisis'
     };
-
+ 
     var TITLES = {
       'inicio': 'Marina Quintana | Consultora | Analista Criminal',
       'certificado-ciberseguridad': 'Certificado Ciberseguridad | Marina Quintana',
@@ -374,7 +376,7 @@ li a:hover { text-decoration: underline; }
       'ejercicio-2': 'Ejercicio 2 —  | Marina Quintana',
       'ejercicio-3': 'Ejercicio 3 —  | Marina Quintana'
     };
-
+ 
     function buildNav() {
       var nav = document.getElementById('nav-links');
       nav.innerHTML = NAV_LINKS.map(function (item) {
@@ -384,29 +386,29 @@ li a:hover { text-decoration: underline; }
           '</a>';
       }).join('');
     }
-
+ 
     function currentRoute() {
       var r = location.hash.replace('#/', '') || 'inicio';
       return document.querySelector('[data-page="' + r + '"]') ? r : 'inicio';
     }
-
+ 
     function render() {
       var route = currentRoute();
-
+ 
       document.querySelectorAll('.page').forEach(function (section) {
         section.hidden = section.dataset.page !== route;
       });
-
+ 
       document.title = TITLES[route] || TITLES.inicio;
-
+ 
       var activeNav = ACTIVE_ALIAS[route] || route;
       document.querySelectorAll('#nav-links a').forEach(function (a) {
         a.classList.toggle('active', a.dataset.route === activeNav);
       });
-
+ 
       window.scrollTo(0, 0);
     }
-
+ 
     /* Un único estado: .sidebar-collapsed. Presente = rail estrecho
        (solo iconos). Ausente = expandido (iconos + texto). El sidebar
        SIEMPRE forma parte del layout flex — nunca overlay, nunca
@@ -416,24 +418,26 @@ li a:hover { text-decoration: underline; }
       var collapsed = document.body.classList.toggle('sidebar-collapsed');
       localStorage.setItem('sidebarCollapsed', collapsed);
     }
-
+ 
     function isMobile() {
       return window.innerWidth <= 768;
     }
-
+ 
     window.addEventListener('hashchange', render);
-
+ 
     window.addEventListener('DOMContentLoaded', function () {
       buildNav();
-
+ 
       // La preferencia guardada solo se restaura en desktop; en móvil
       // el CSS ya arranca colapsado por defecto (ver media query).
       if (!isMobile() && localStorage.getItem('sidebarCollapsed') === 'true') {
         document.body.classList.add('sidebar-collapsed');
       }
-
+ 
       render();
     });
   </script>
 </body>
 </html>
+ 
+
